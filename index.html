@@ -38,7 +38,7 @@
 
         const MODEL_PATH = "https://srv-store4.gofile.io/download/5Rc1au/box.glb";
 
-        const BACKGROUND_COLOR = 0xFF0000;
+        const BACKGROUND_COLOR = 0xf1f1f1;
         // Init the scene
         const scene = new THREE.Scene();
         // Set background
@@ -53,7 +53,7 @@
         renderer.shadowMap.enabled = true;
         renderer.setPixelRatio(window.devicePixelRatio); 
 
-        var cameraFar = 50;
+        var cameraFar = 5;
 
         document.body.appendChild(renderer.domElement);
 
