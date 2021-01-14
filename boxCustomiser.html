@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js" integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA==" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    
+
+    <meta charset="UTF-8">
+    
+    <!-- Imporant meta information to make the page as rigid as possible on mobiles, to avoid unintentional zooming on the page itself  -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>box</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&display=swap" rel="stylesheet">
+
+
+    <!-- The main three.js file -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.js'></script>
+
+    <!-- This brings in the ability to load custom 3D objects in the .gltf file format. Blender allows the ability to export to this format out the box -->
+    <script src='https://cdn.jsdelivr.net/gh/mrdoob/three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
+
+    <!-- This is a simple to use extension for three.js that activates all the rotating, dragging and zooming controls we need for both mouse and touch, there isn't a clear CDN for this that I can find -->
+    <script src='https://threejs.org/examples/js/controls/OrbitControls.js'></script>
+
+</head>
+<body>
+    <!-- The canvas element is used to draw the 3D scene -->
+    <canvas id="c"></canvas>
+    <script type="module">
+        import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
+
+        var theModel;
+
+        const MODEL_PATH = "https://srv-store4.gofile.io/download/5Rc1au/box.glb";
+
+        const BACKGROUND_COLOR = 0xf1f1f1;
+        // Init the scene
+        const scene = new THREE.Scene();
+        // Set background
+        scene.background = new THREE.Color(BACKGROUND_COLOR );
+        scene.fog = new THREE.Fog(BACKGROUND_COLOR, 20, 100);
+
+        const canvas = document.querySelector('#c');
+
+        // Init the renderer
+        const renderer = new THREE.WebGLRenderer({canvas, antialias: true});
+
+        renderer.shadowMap.enabled = true;
+        renderer.setPixelRatio(window.devicePixelRatio); 
+
+        var cameraFar = 5;
+
+        document.body.appendChild(renderer.domElement);
+
+        // Add a camerra
+        var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = cameraFar;
+        camera.position.x = 0;
+
+        // Initial material
+        const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
+
+        const INITIAL_MAP = [
+        {childID: "Plane", mtl: INITIAL_MTL},
+        {childID: "Plane001", mtl: INITIAL_MTL},
+        {childID: "Plane002", mtl: INITIAL_MTL},
+        {childID: "Plane003", mtl: INITIAL_MTL},
+        {childID: "Plane004", mtl: INITIAL_MTL},
+        ];
+
+        // Init the object loader
+        var loader = new THREE.GLTFLoader();
+
+        loader.load(MODEL_PATH, function(gltf) {
+        theModel = gltf.scene;
+
+            theModel.traverse((o) => {
+            if (o.isMesh) {
+            o.castShadow = true;
+            o.receiveShadow = true;
+            }
+        });
+        
+        // Set the models initial scale   
+        theModel.scale.set(2,2,2);
+        theModel.rotation.y = Math.PI;
+
+        // Offset the y position a bit
+        theModel.position.y = -1;
+
+        // Set initial textures
+        for (let object of INITIAL_MAP) {
+            initColor(theModel, object.childID, object.mtl);
+        }
+
+        // Add the model to the scene
+        scene.add(theModel);
+
+        }, undefined, function(error) {
+        console.error(error)
+        });
+
+        // Function - Add the textures to the models
+        function initColor(parent, type, mtl) {
+        parent.traverse((o) => {
+        if (o.isMesh) {
+            if (o.name.includes(type)) {
+                o.material = mtl;
+                o.nameID = type; // Set a new property to identify this object
+            }
+        }
+        });
+        }
+
+        // Add lights
+        var hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.61 );
+            hemiLight.position.set( 0, 50, 0 );
+        // Add hemisphere light to scene   
+        scene.add( hemiLight );
+
+        var dirLight = new THREE.DirectionalLight( 0xffffff, 0.54 );
+            dirLight.position.set( -8, 12, 8 );
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
+        // Add directional Light to scene    
+            scene.add( dirLight );
+
+        // Floor
+        var floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
+        var floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0xeeeeee,
+        shininess: 0
+        });
+
+        var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+        floor.rotation.x = -0.5 * Math.PI;
+        floor.receiveShadow = true;
+        floor.position.y = -1;
+        scene.add(floor);
+
+        // Add controls
+        var controls = new OrbitControls( camera, renderer.domElement );
+        controls.maxPolarAngle = Math.PI / 2;
+        controls.minPolarAngle = Math.PI / 3;
+        controls.enableDamping = true;
+        controls.enablePan = false;
+        controls.dampingFactor = 0.1;
+        controls.autoRotate = false; // Toggle this if you'd like the chair to automatically rotate
+        controls.autoRotateSpeed = 0.2; // 30
+
+        function animate() {
+        controls.update();
+        
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+        
+        if (resizeRendererToDisplaySize(renderer)) {
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        }
+        }
+
+        animate();
+
+        // Function - New resizing method
+        function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var canvasPixelWidth = canvas.width / window.devicePixelRatio;
+        var canvasPixelHeight = canvas.height / window.devicePixelRatio;
+
+        const needResize = canvasPixelWidth !== width || canvasPixelHeight !== height;
+        if (needResize) {
+            
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+        }
+    </script>
+</body>
+</html>
