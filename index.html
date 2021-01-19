@@ -33,7 +33,7 @@
     <canvas id="c"></canvas>
     <div class="controls">
         <div id="js-tray" class="tray">
-            <div id="js-tray-slide" class="tray_slide">
+            <div id="js-tray-slide" class="tray__slide">
             </div>
         </div>
     </div>
@@ -215,14 +215,14 @@
         function buildColors(colors){
             for (let [i,color] of colors.entries()){
                 let swatch = document.createElement('div');
-                swatch.classList.add('tray_swatch');
+                swatch.classList.add('tray__swatch');
                 swatch.style.background = '#' + color.color;
                 swatch.setAttribute('data-key', i);
                 TRAY.append(swatch);
             }
         }
 
-        const swatches = document.querySelectorAll(".tray_swatch");
+        const swatches = document.querySelectorAll(".tray__swatch");
         for (const swatch of swatches){
             swatch.addEventListener('click', selectSwatch);
         }
