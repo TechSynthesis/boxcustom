@@ -59,6 +59,7 @@
     <script type="module">
         import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
+        var activeOption = 'Plane';
         const colors = [
             {
                 color: '66533C'
@@ -242,6 +243,21 @@
         }
         buildColors(colors);
 
+        const options = document.querySelectorAll(".option");
+        for (const option of options){
+            option.addEventListener('click', selectOption);
+        }
+
+        function selectOption(e){
+            let option = e.target;
+            activeOption = e.target.dataset.option;
+            for ( const otherOption of options){
+                otherOption.classList.remove('--is-active');
+            }
+            option.classList.add('--is-active');
+        }
+
+
         const swatches = document.querySelectorAll(".tray__swatch");
         for (const swatch of swatches){
             swatch.addEventListener('click', selectSwatch);
@@ -258,7 +274,7 @@
                 shininess: color.shininess ? color.shininess :10
             });
 
-            setMaterial(theModel, 'Plane001', new_mtl);
+            setMaterial(theModel, activeOption, new_mtl);
         }
 
         //Function - Set Material
