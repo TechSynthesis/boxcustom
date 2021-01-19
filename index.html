@@ -31,8 +31,34 @@
 <body>
     <!-- The canvas element is used to draw the 3D scene -->
     <canvas id="c"></canvas>
+    <div class="controls">
+        <div id="js-tray" class="tray">
+            <div id="js-tray-slide" class="tray_slide">
+            </div>
+        </div>
+    </div>
     <script type="module">
         import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
+
+        const colors = [
+            {
+                color: '66533C'
+            },
+            {
+                color: '173A2F'
+            },
+            {
+                color: '153944'
+            },
+            {
+                color: '27548D'
+            },
+            {
+                color: '438AAC'
+            }  
+        ]
+        
+        const TRAY = document.getElementById('js-tray-slide');
 
         var theModel;
 
@@ -183,6 +209,20 @@
         }
         return needResize;
         }
+
+
+        //Function - Build Colors
+        function buildColors(colors){
+            for (let [i,color] of colors.entries()){
+                let swatch = document.createElement('div');
+                swatch.classList.add('tray_swatch');
+                swatch.style.background = '#' + color.color;
+                swatch.setAttribute('data-key', i);
+                TRAY.append(swatch);
+            }
+        }
+
+        buildColors(colors);
     </script>
 </body>
 </html>
