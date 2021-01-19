@@ -222,6 +222,37 @@
             }
         }
 
+        const swatches = document.querySelectorAll(".tray_swatch");
+        for (const swatch of swatches){
+            swatch.addEventListener('click', selectSwatch);
+        }
+
+        //Function - Select Swatch 
+        //updates the model with new color
+        function selectSwatch(e){
+            let color = colors[parseInt(e.target.dataset.key)];
+            let new_mtl;
+
+            new_mtl = new THREE.MeshPhongMaterial ({
+                color: parseInt('0x' + color.color),
+                shininess: color.shininess ? color.shininess :10
+            });
+
+            setMaterial(theModel, 'Plane001', new_mtl);
+        }
+
+        //Function - Set Material
+        function setMaterial(parent, type, mtl){
+            parent.traverse((o) => {
+                if(o.isMesh && o.nameID != null){
+                    if (o.nameID == type){
+                        o.material = mtl;
+                    }
+                }
+            });
+        } 
+        
+
         buildColors(colors);
     </script>
 </body>
