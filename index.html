@@ -124,7 +124,7 @@
         fontLoader.load('LisztFY_Regular.json',  function (font){
             var textGeo = new THREE.TextGeometry("Test Text", {
                 font : font,
-                size : 1,
+                size : 0.3,
                 height : 0.1,
                 curveSegments : 21,
                 bevelEnabled : false
@@ -132,7 +132,8 @@
 
             var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
             var mesh = new THREE.Mesh(textGeo, textMaterial);
-            mesh.position.set(-0.5,-1,2.3);
+            //mesh.position.set(-0.5,-1,2.3);
+            mesh.position.copy(modelPos);
             scene.add(mesh);
         });
 
@@ -155,6 +156,7 @@
 
         // Offset the y position a bit
         theModel.position.y = -1;
+        var modelPos = theModel.position.y = -1;
 
         // Set initial textures
         for (let object of INITIAL_MAP) {
