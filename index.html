@@ -119,7 +119,23 @@
         {childID: "Plane004", mtl: INITIAL_MTL},
         ];
 
+        //Init Font Loader
+        var fontLoader = new THREE.FontLoader();
+        fontLoader.load('LisztFY_Regular.json',  function (font){
+            var textGeo = new THREE.TextGeometry("Test Text", {
+                font : font,
+                size : 0.3,
+                height : 0.1,
+                curveSegments : 21,
+                bevelEnabled : false
+            });
 
+            var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
+            var mesh = new THREE.Mesh(textGeo, textMaterial);
+            //mesh.position.set(-0.5,-1,2.3);
+            mesh.position.copy(modelPos);
+            scene.add(mesh);
+        });
 
         // Init the object loader
         var loader = new THREE.GLTFLoader();
@@ -290,25 +306,6 @@
                 }
             });
         }  
-
-        //Init Font Loader
-        var fontLoader = new THREE.FontLoader();
-        fontLoader.load('LisztFY_Regular.json',  function (font){
-            var textGeo = new THREE.TextGeometry("Test Text", {
-                font : font,
-                size : 0.3,
-                height : 0.1,
-                curveSegments : 21,
-                bevelEnabled : false
-            });
-
-            var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
-            var mesh = new THREE.Mesh(textGeo, textMaterial);
-            //mesh.position.set(-0.5,-1,2.3);
-            mesh.position.copy(modelPos);
-            scene.add(mesh);
-        });
-
     </script>
 </body>
 </html>
