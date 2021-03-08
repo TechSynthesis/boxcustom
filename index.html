@@ -46,6 +46,10 @@
         <div class="option" data-option="Cube004">
             <img src="top.svg" alt=""/>
         </div>
+        <div class="option" data-option="Cube005">
+            <img src="top.svg" alt=""/>
+        </div>
+
     </div>
 
     
@@ -119,6 +123,7 @@
         {childID: "Cube002", mtl: INITIAL_MTL},
         {childID: "Cube003", mtl: INITIAL_MTL},
         {childID: "Cube004", mtl: INITIAL_MTL},
+        {childID: "Cube005", mtl: INITIAL_MTL},
         ];
 
         //Init Font Loader
@@ -136,7 +141,7 @@
             var mesh = new THREE.Mesh(textGeo, textMaterial);
             mesh.position.set(-1.0,0,0.5);
             mesh.rotation.x = -1.5;
-            //mesh.position.copy(modelPos);
+            //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
             scene.add(mesh);
         });
 
