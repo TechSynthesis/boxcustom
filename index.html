@@ -31,19 +31,19 @@
 <body>
     <!-- These toggle the the different parts of the chair that can be edited, note data-option is the key that links to the name of the part in the 3D file -->
     <div class="options">
-        <div class="option --is-active" data-option="Plane">
+        <div class="option --is-active" data-option="Cube">
             <img src="top.svg" alt="test object"/>
         </div>
-        <div class="option" data-option="Plane001">
+        <div class="option" data-option="Cube001">
             <img src="top.svg" alt=""/>
         </div>
-        <div class="option" data-option="Plane002">
+        <div class="option" data-option="Cube002">
             <img src="top.svg" alt=""/>
         </div>
-        <div class="option" data-option="Plane003">
+        <div class="option" data-option="Cube003">
             <img src="top.svg" alt=""/>
         </div>
-        <div class="option" data-option="Plane004">
+        <div class="option" data-option="Cube004">
             <img src="top.svg" alt=""/>
         </div>
     </div>
@@ -61,7 +61,7 @@
     <script type="module">
         import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
-        var activeOption = 'Plane';
+        var activeOption = 'Cube';
         const colors = [
             {
                 color: '66533C'
@@ -84,7 +84,7 @@
 
         var theModel;
 
-        const MODEL_PATH = "box.glb";
+        const MODEL_PATH = "BoxCal.glb";
 
         const BACKGROUND_COLOR = 0xf1f1f1;
         // Init the scene
@@ -114,11 +114,11 @@
         const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
 
         const INITIAL_MAP = [
-        {childID: "Plane", mtl: INITIAL_MTL},
-        {childID: "Plane001", mtl: INITIAL_MTL},
-        {childID: "Plane002", mtl: INITIAL_MTL},
-        {childID: "Plane003", mtl: INITIAL_MTL},
-        {childID: "Plane004", mtl: INITIAL_MTL},
+        {childID: "Cube", mtl: INITIAL_MTL},
+        {childID: "Cube001", mtl: INITIAL_MTL},
+        {childID: "Cube002", mtl: INITIAL_MTL},
+        {childID: "Cube003", mtl: INITIAL_MTL},
+        {childID: "Cube004", mtl: INITIAL_MTL},
         ];
 
         //Init Font Loader
