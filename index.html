@@ -168,7 +168,7 @@
             const inputHandler2 = function(e) {
                 var mesh1;
                 scene.remove(mesh);
-                if(typeof mesh1 !== 'undefined'){scene.remove(mesh1);}
+                if(mesh1){scene.remove(mesh1);}
                 var x = e.target.value;
                 fontLoader.load('LisztFY_Regular.json',  function (font){
                     var textGeo = new THREE.TextGeometry(x, {
