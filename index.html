@@ -49,6 +49,16 @@
         <div class="option" data-option="Cube005">
             <img src="top.svg" alt=""/>
         </div>
+        <div class="option" data-option="" style="padding-left: 80px;">
+            <input type="number" id="xaxis" placeholder="enter x axis" > 
+        </div>
+        <div class="option" data-option="" style="padding-left: 80px;">
+            <input type="number" id="yaxis" placeholder="enter y axis" > 
+        </div>
+        <div class="option" data-option="" style="padding-left: 80px;">
+            <input type="number" id="zaxis" placeholder="enter z axis" > 
+        </div>
+
 
     </div>
 
@@ -144,7 +154,25 @@
             //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
             scene.add(mesh);
         });
-   
+
+        //Update Postion of text onChange
+        var textx = document.getElementById('xaxis');
+        var texty = document.getElementById('yaxis');
+        var textz = document.getElementById('zaxis');
+
+        const inputHandler = function(e) {
+            var x = e.target.value;
+        
+            mesh.position.set(x,0.49,3.5);
+        
+            scene.add(mesh);
+        
+        
+        
+        
+        }
+        textx.addEventListener('input', inputHandler);
+        textx.addEventListener('propertychange', inputHandler);
 			
 
         // Init the object loader
