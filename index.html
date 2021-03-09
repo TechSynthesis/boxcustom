@@ -123,10 +123,10 @@
         document.body.appendChild(renderer.domElement);
 
         // Add a camerra
-        var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0, 1000);
         camera.position.z = cameraFar;
         camera.position.x = 0;
-        camera.position.y = 0;
+
 
         // Initial material
         const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
