@@ -166,8 +166,9 @@
             
 
             const inputHandler2 = function(e) {
+                var mesh1;
                 scene.remove(mesh);
-                if(mesh1){scene.remove(mesh1);}
+                if(typeof mesh1 !== 'undefined'){scene.remove(mesh1);}
                 var x = e.target.value;
                 fontLoader.load('LisztFY_Regular.json',  function (font){
                     var textGeo = new THREE.TextGeometry(x, {
@@ -179,7 +180,7 @@
                     });
 
                     var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
-                    var mesh1 = new THREE.Mesh(textGeo, textMaterial);
+                    mesh1 = new THREE.Mesh(textGeo, textMaterial);
                     mesh.position.set(0,0,3.5);
                     mesh.rotation.x = 0;
                     //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
