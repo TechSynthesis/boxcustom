@@ -161,12 +161,12 @@
             var texty = document.getElementById('yaxis');
             var textz = document.getElementById('zaxis');
             
-            const inputHandler = function(e) {
-                var x = e.target.value;            
-                mesh.position.set(x,y,z);  
-                scene.add(mesh);
-            }
+
             const inputHandler2 = function(e) {
+                scene.remove(mesh);
+                mesh.geometry.dispose();
+                mesh.material.dispose();
+
                 var x = e.target.value;
                 
                 var textGeo = new THREE.TextGeometry(x, {
@@ -183,10 +183,18 @@
             mesh.rotation.x = 0;
             //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
             scene.add(mesh);
-                
+
+            const inputHandler = function(e) {
+                var x = e.target.value;            
+                mesh.position.set(x,y,z);  
+                scene.add(mesh);
             }
+
             textx.addEventListener('input', inputHandler);
             textx.addEventListener('propertychange', inputHandler);
+                
+            }
+
 
             textFront.addEventListener('input', inputHandler2);
             textFront.addEventListener('propertychange', inputHandler2);
