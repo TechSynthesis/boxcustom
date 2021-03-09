@@ -140,17 +140,9 @@
         ];
             
         //Init Font Loader
-        var textFront = document.getElementById('textFront');
         var fontLoader = new THREE.FontLoader();
         fontLoader.load('LisztFY_Regular.json',  function (font){
-            var x = 'Test';
-            const inputHandler2 = function(e) {
-               x = e.target.value;            
-               scene.add(mesh);
-            }
-            textFront.addEventListener('input', inputHandler2);
-            textFront.addEventListener('propertychange', inputHandler2);
-            var textGeo = new THREE.TextGeometry(x, {
+            var textGeo = new THREE.TextGeometry("Test Text", {
                 font : font,
                 size : 0.05,
                 height : 0,
@@ -171,14 +163,33 @@
             
             const inputHandler = function(e) {
                 var x = e.target.value;            
-                mesh.position.set(x,1,1);  
+                mesh.position.set(x,y,z);  
                 scene.add(mesh);
             }
+            const inputHandler2 = function(e) {
+                var x = e.target.value;
+                
+                var textGeo = new THREE.TextGeometry(x, {
+                font : font,
+                size : 0.05,
+                height : 0,
+                curveSegments : 21,
+                bevelEnabled : false
+            });
 
+            var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
+            var mesh = new THREE.Mesh(textGeo, textMaterial);
+            mesh.position.set(3.94,0.49,3.5);
+            mesh.rotation.x = 0;
+            //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
+            scene.add(mesh);
+                
+            }
             textx.addEventListener('input', inputHandler);
             textx.addEventListener('propertychange', inputHandler);
 
-
+            textFront.addEventListener('input', inputHandler2);
+            textFront.addEventListener('propertychange', inputHandler2);
         
         });
 
