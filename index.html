@@ -146,6 +146,72 @@
         });
         */
 
+        mesh = new THREE.Mesh( new THREE.Geometry(), new THREE.MeshPhongMaterial( { color: 0x00fffc } ));
+        scene.add( mesh );
+
+        data = {
+             text : "Keep s",
+            size : 2,
+            height : 0.1,
+            curveSegments : 12,
+            font : "helvetiker",
+            weight : "Regular",
+            bevelEnabled : false,
+            bevelThickness : 1,
+            bevelSize : 0.2,
+            bevelSegments: 10,
+        };
+
+        fonts = [
+            "Black",
+        ];
+
+
+        controller = new function() {
+            this.textColor = mesh.material.color.getHex();
+           
+        }
+        function generateGeometry() {
+
+            var loader = new THREE.FontLoader();
+       
+            loader.load( 'https://threejs.org//examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
+                
+                var geometry = new THREE.TextGeometry( data.text, {
+                    font: font,
+                    size: data.size,
+                    height: data.height,
+                    curveSegments: data.curveSegments,
+                    bevelEnabled: data.bevelEnabled,
+                    bevelThickness: data.bevelThickness,
+                    bevelSize: data.bevelSize,
+                    bevelSegments: data.bevelSegments
+                } );
+
+                geometry.computeBoundingBox()
+                console.log(geometry.boundingBox)
+                geometry.center();
+                mesh.geometry.dispose();
+                mesh.geometry = geometry;
+                var box = new THREE.BoxHelper( mesh, 0xff0000 );
+                scene.add( box );
+            
+
+            } );
+            
+        }
+        gui = new dat.GUI();
+        folder = gui.addFolder( 'Text' );
+            folder.add( data, 'text' ).onChange( generateGeometry );
+            folder.add( data, 'size', 1, 30 ).onChange( generateGeometry );
+            folder.add( data, 'height', 0, 20 ).onChange( generateGeometry );
+            folder.addColor( controller, 'textColor').onChange( function() { valuer=mesh.material.color.set(controller.textColor);
+              
+            });
+
+      generateGeometry();
+			
+
         // Init the object loader
         var loader = new THREE.GLTFLoader();
 
