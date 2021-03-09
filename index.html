@@ -184,14 +184,14 @@
             //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
             scene.add(mesh);
 
-            const inputHandler = function(e) {
-                var x = e.target.value;            
-                mesh.position.set(x,y,z);  
-                scene.add(mesh);
-            }
+                const inputHandler = function(e) {
+                    var x = e.target.value;            
+                    mesh.position.set(x,0.49,3.5);  
+                    scene.add(mesh);
+                }
 
-            textx.addEventListener('input', inputHandler);
-            textx.addEventListener('propertychange', inputHandler);
+                textx.addEventListener('input', inputHandler);
+                textx.addEventListener('propertychange', inputHandler);
                 
             }
 
