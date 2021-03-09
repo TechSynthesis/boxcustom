@@ -123,9 +123,10 @@
         document.body.appendChild(renderer.domElement);
 
         // Add a camerra
-        var camera = new THREE.PerspectiveCamera( 20, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = cameraFar;
         camera.position.x = 0;
+        camera.position.y = 0;
 
         // Initial material
         const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
@@ -182,7 +183,7 @@
                     var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
                     mesh1 = new THREE.Mesh(textGeo, textMaterial);
                     mesh1.name = 'enteredText';
-                    mesh1.position.set(-0.2,-0.8,0.173);
+                    mesh1.position.set(-0.2,-0.8,0.171);
                     mesh1.rotation.x = 0;
                     //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
                     scene.add(mesh1);
