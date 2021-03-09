@@ -166,6 +166,7 @@
             
 
             const inputHandler2 = function(e) {
+                scene.remove(mesh);
                 var x = e.target.value;
                 fontLoader.load('LisztFY_Regular.json',  function (font){
                     var textGeo = new THREE.TextGeometry(x, {
