@@ -133,7 +133,7 @@
         var texture = new THREE.TextureLoader().load('lion.png');
         const INITIAL_MAP = [
         {childID: "Cube", mtl: INITIAL_MTL},
-        {childID: "Cube001", mtl: texture},
+        {childID: "Cube001", mtl: INITIAL_MTL},
         {childID: "Cube002", mtl: INITIAL_MTL},
         {childID: "Cube003", mtl: INITIAL_MTL},
         {childID: "Cube004", mtl: INITIAL_MTL},
@@ -215,11 +215,13 @@
         loader.load(MODEL_PATH, function(gltf) {
         theModel = gltf.scene;
 
+
             theModel.traverse((o) => {
             if (o.isMesh) {
             o.castShadow = true;
             o.receiveShadow = true;
             }
+
         });
  
         // Set the models initial scale   
@@ -230,11 +232,18 @@
         theModel.position.y = -1;
         var modelPos = theModel.position.y = -1;
 
+        var textureLoader = new THREE.TextureLoader();
+        var map = textureLoader.load("lion.png");
+
         // Set initial textures
         for (let object of INITIAL_MAP) {
             initColor(theModel, object.childID, object.mtl);
         }
-
+        
+        theModel.material = new THREE.MeshPhongMaterial({
+                map: map,
+                color: 0xff00ff,
+            });
         // Add the model to the scene
         scene.add(theModel);
 
@@ -249,6 +258,7 @@
             if (o.name.includes(type)) {
                 o.material = mtl;
                 o.nameID = type; // Set a new property to identify this object
+            
             }
         }
         });
