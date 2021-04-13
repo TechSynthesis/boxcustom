@@ -126,7 +126,8 @@
         var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000);
         camera.position.z = cameraFar;
         camera.position.x = 0;
-
+        var textureLoader = new THREE.TextureLoader();
+        var map = textureLoader.load("lion.png");
         var c5 = theModel.material = new THREE.MeshPhongMaterial({
                 map: map,
                 color: 0xff00ff,
@@ -234,8 +235,7 @@
         theModel.position.y = -1;
         var modelPos = theModel.position.y = -1;
 
-        var textureLoader = new THREE.TextureLoader();
-        var map = textureLoader.load("lion.png");
+
 
         // Set initial textures
         for (let object of INITIAL_MAP) {
