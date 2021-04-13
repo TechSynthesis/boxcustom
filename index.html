@@ -127,17 +127,19 @@
         camera.position.z = cameraFar;
         camera.position.x = 0;
 
-
+        var c5 = theModel.material = new THREE.MeshPhongMaterial({
+                map: map,
+                color: 0xff00ff,
+            });
         // Initial material
         const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
-        var texture = new THREE.TextureLoader().load('lion.png');
         const INITIAL_MAP = [
         {childID: "Cube", mtl: INITIAL_MTL},
         {childID: "Cube001", mtl: INITIAL_MTL},
         {childID: "Cube002", mtl: INITIAL_MTL},
         {childID: "Cube003", mtl: INITIAL_MTL},
         {childID: "Cube004", mtl: INITIAL_MTL},
-        {childID: "Cube005", mtl: INITIAL_MTL},
+        {childID: "Cube005", mtl: c5},
         ];
             
         //Init Font Loader
@@ -240,10 +242,7 @@
             initColor(theModel, object.childID, object.mtl);
         }
         
-        theModel.material = new THREE.MeshPhongMaterial({
-                map: map,
-                color: 0xff00ff,
-            });
+
         // Add the model to the scene
         scene.add(theModel);
 
