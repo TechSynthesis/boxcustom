@@ -1,0 +1,10 @@
+{
+                "editor.formatOnSave": true,
+                "eslint.alwaysShowStatus": true,
+                "files.autoSave": "onFocusChange",
+                "editor.formatOnPaste": true,
+                "editor.fontFamily": "SF Mono",
+                "editor.fontSize": 12.5,
+                "window.zoomLevel": 0.9,
+                "eslint.enable": true
+}

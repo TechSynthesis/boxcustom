@@ -183,7 +183,7 @@
                     var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
                     mesh1 = new THREE.Mesh(textGeo, textMaterial);
                     mesh1.name = 'enteredText';
-                    mesh1.position.set(-0.2,-0.8,0.171);
+                    mesh1.position.set(-0.2,-1,0.171);
                     mesh1.rotation.x = 0;
                     //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
                     scene.add(mesh1);
@@ -320,6 +320,7 @@
         if (needResize) {
             
             renderer.setSize(width, height, false);
+        
         }
         return needResize;
         }
