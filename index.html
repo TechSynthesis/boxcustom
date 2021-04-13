@@ -130,14 +130,14 @@
 
         // Initial material
         const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
-
+        var texture = THREE.ImageUtils.loadTexture("lion.png");
         const INITIAL_MAP = [
         {childID: "Cube", mtl: INITIAL_MTL},
         {childID: "Cube001", mtl: INITIAL_MTL},
         {childID: "Cube002", mtl: INITIAL_MTL},
         {childID: "Cube003", mtl: INITIAL_MTL},
         {childID: "Cube004", mtl: INITIAL_MTL},
-        {childID: "Cube005", mtl: INITIAL_MTL},
+        {childID: "Cube005", mtl: texture},
         ];
             
         //Init Font Loader
@@ -191,9 +191,7 @@
                     //mesh.position.copy(modelPos); 10.971 , y -1.2362 , z 8.8882
                     scene.add(mesh1);
                 });
-
-
-                
+  
             }
 
             const inputHandler = function(e) {
@@ -210,10 +208,6 @@
             textFront.addEventListener('propertychange', inputHandler2);
         
      });
-
-
-        
-			
 
         // Init the object loader
         var loader = new THREE.GLTFLoader();
@@ -259,7 +253,8 @@
         }
         });
         }
-        theModel.material.INITIAL_MTL = THREE.ImageUtils.loadTexture("lion.png");
+        
+        
         // Add lights
         var hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.61 );
             hemiLight.position.set( 0, 50, 0 );
