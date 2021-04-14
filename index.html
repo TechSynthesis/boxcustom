@@ -129,7 +129,7 @@
         var textureLoader = new THREE.TextureLoader();
         var map = textureLoader.load("lion2.png");
         //map.wrapS = map.wrapT = THREE.MirroredRepeatWrapping;
-        //map.repeat.set(20, 20);
+        map.repeat.set(1, 1);
         //map.offset.set(1, 1);
         var c5 = new THREE.MeshPhongMaterial({
                 map: map,
@@ -230,7 +230,7 @@
             }
 
         });
- 
+
         // Set the models initial scale   
         theModel.scale.set(2,2,2);
         theModel.rotation.y = Math.PI;
@@ -238,8 +238,6 @@
         // Offset the y position a bit
         theModel.position.y = -1;
         var modelPos = theModel.position.y = -1;
-
-
 
         // Set initial textures
         for (let object of INITIAL_MAP) {
