@@ -127,8 +127,8 @@
         camera.position.z = cameraFar;
         camera.position.x = 0;
         var textureLoader = new THREE.TextureLoader();
-        var map = textureLoader.load("lion2.png");
-        map.wrapS = map.wrapT = THREE.MirroredRepeatWrapping;
+        var map = textureLoader.load("lion3.png");
+        //map.wrapS = map.wrapT = THREE.MirroredRepeatWrapping;
         //map.repeat.set(0.2, 1);
         //map.offset.set(1, 1);
         var c5 = new THREE.MeshPhongMaterial({
@@ -333,7 +333,6 @@
         }
         return needResize;
         }
-
 
         //Function - Build Colors
         function buildColors(colors){
