@@ -129,6 +129,7 @@
         var textureLoader = new THREE.TextureLoader();
         var map = textureLoader.load("lion3.png");
         //map.wrapS = map.wrapT = THREE.MirroredRepeatWrapping;
+        map.wrapS = map.wrapT = false;
         //map.repeat.set(0.2, 1);
         //map.offset.set(1, 1);
         var c5 = new THREE.MeshPhongMaterial({
@@ -180,11 +181,13 @@
                 var x = e.target.value;
                 fontLoader.load('LisztFY_Regular.json',  function (font){
                     var textGeo = new THREE.TextGeometry(x, {
+
                         font : font,
                         size : 0.05,
                         height : 0,
                         curveSegments : 21,
                         bevelEnabled : false
+                    
                     });
 
                     var textMaterial = new THREE.MeshPhongMaterial({ color: 0x438AAC})
